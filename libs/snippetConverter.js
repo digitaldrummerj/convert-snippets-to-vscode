@@ -38,7 +38,8 @@ function processSnippetFolder(folderPath, outputFileName) {
 				snippet = convertTextMate(fileName);
 			} else if (extension === '.sublime-snippet') {
 				snippet = convertSublime(fileName);
-			}
+            }
+            // console.log(snippet);
 			if (snippet) {
 				if (snippet.prefix && snippet.body) {
 					snippets[getId(snippet.prefix)] = snippet;
@@ -131,7 +132,8 @@ function processSnippetFolder(folderPath, outputFileName) {
 				case 'tabtrigger':
 					snippet.prefix = text;
 					break;
-				case 'content':
+                case 'content':
+                    // console.log('text', text);
 					snippet.body = text;
 					break;
 				case 'description':
@@ -144,7 +146,8 @@ function processSnippetFolder(folderPath, outputFileName) {
 		
 		}
 		
-		parser.write(body);
+        parser.write(body);
+        // console.log(snippet);
 		return snippet;
 	}	
 	
@@ -176,7 +179,8 @@ function getFileContent(filePath, errors) {
 		var content = fs.readFileSync(filePath).toString();
 		if (content === '') {
 			errors.push(filePath + ": Empty file content");
-		}
+        }
+        // console.log(content);
 		return content;
 	} catch (e) {
 		errors.push(filePath + ": Problems loading file content: " + e.message);

@@ -1,31 +1,18 @@
-'use strict';
+#!/usr/bin/env node
 
-var path = require('path');
-var fs = require('fs');
-var snippetConverter = require('./snippetConverter');
-var inquirer  = require('inquirer');
-console.log("Folder location that contains Text Mate (.tmSnippet) and Sublime snippets (.sublime-snippet)");
+var commandLineArgs = require('command-line-args');
 
-var snippetPrompt = (function () {
-inquirer.prompt([{
-    type: 'input',
-    name: 'snippetPath',
-    message: 'Folder name:'
-},{
-    type: 'input',
-    name: 'outputFileName',
-    message: 'Output File Name:'
-}], function (snippetAnswer) {
-    var count = snippetConverter.processSnippetFolder(snippetAnswer.snippetPath, snippetAnswer.outputFileName);
-    if (count < 0) {
-    snippetPrompt();
-    }
-     
-    console.log('');
-    console.log('Snippet Converted!');
-    console.log('');
-    console.log('\r\n');
-});
-});
-snippetPrompt();
+var generator = require("./bin/convert-snippet-to-vscode.js");
 
+var cli = commandLineArgs([
+    { name: 'snippetPath', alias: 's', type: String },
+    { name: 'outputFile', alias: 'o', type: String }
+]);
+
+var options = cli.parse();
+if (options.snippetPath && options.outputFile) {
+    console.log("SnippetPath: ", options.snippetPath);
+    console.log("OutputFile: ", options.outputFile);
+}
+
+generator.generateSnippets(options.snippetPath, options.outputFile);
