@@ -9,17 +9,10 @@ var inquirer = require('inquirer');
 var commandLineArgs = require('command-line-args');
 
 function generateSnippet(snippetPath, outputFileName) {
-    console.log("Gen SnippetPath: ", snippetPath);
-    console.log("Gen OutputFileName: ", outputFileName);
     
     var convert = (function (snippetPath, outputFileName) {
         console.log("converting snippets");
-        var count = snippetConverter.processSnippetFolder(snippetPath, outputFileName);
-
-        console.log('');
-        console.log('Snippet Converted!');
-        console.log('');
-        console.log('\r\n');
+        var count =  snippetConverter.processSnippetFolder(snippetPath, outputFileName);
 
         return count;
     });
@@ -44,7 +37,7 @@ function generateSnippet(snippetPath, outputFileName) {
                 var count = convert(snippetAnswer.snippetPath, snippetAnswer.outputFileName);
                 if (count < 0) {
                     snippetPrompt();
-                }
+                } 
             });
     });
 

@@ -4,29 +4,40 @@ Based off the [VSCode Yeoman generator](https://github.com/Microsoft/vscode-gene
 
 One other difference from the [VSCode Yeoman generator](https://github.com/Microsoft/vscode-generator-code), is that if will recursively look through the given directory for the snippets.
  
-## Install the Generator
-
-1. Git this repo
-1. run   
+## Install the Converter
 
 ```bash
-npm install
+npm install convert-snippets-to-vscode
+```
+
+```bash
+npm install -g convert-snippets-to-vscode
 ```
 
 ## Run Converter
 
-To launch the converter simply type:
+To launch the converter and be prompted for info simply type:
 
 ```bash
-node index.js
+$ snippetToVsCode
+
+Folder location that contains Text Mate (.tmSnippet) and Sublime snippets (.sublime-snippet)
+? Folder name: c:\temp\Snippets\Css
+? Output File Name: c:\temp\css.json 
 ```
-## Generator Output
 
-A json file with the converted templates.
+To launch to convert and pass in command line arguments:
 
-Take the generated file and add it to your VSCode Extension that you generated with [VSCode Yeoman generator](https://github.com/Microsoft/vscode-generator-code) and add the file to the snippets directory.
+```bash
+snippetToVsCode -s c:\temp\Snippets\Css -o c:\temp\css.json
+```
+## Converter Output
 
-Then update the package.json file in your VSCode Extension project with the new snippets file name and language. 
+A json file with the converted templates in the vscode format.
+
+Take the generated file, add it to your VSCode Extension that you generated with [VSCode Yeoman generator](https://github.com/Microsoft/vscode-generator-code) in the snippets directory.
+
+Then update the package.json file in your VSCode Extension project with the new snippets file name and language that it supports. 
 
 ## License
 
