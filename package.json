@@ -1,6 +1,6 @@
 {
   "name": "convert-snippets-to-vscode",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "Convert Sublime and Textmate Snippets to Visual Studio Code Format",
   "keywords": [
     "sublime",
