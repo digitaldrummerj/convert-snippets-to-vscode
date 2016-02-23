@@ -16,14 +16,17 @@ function processSnippetFolder(folderPath, outputFileName) {
 		return count;
 	}
     
-    fs.writeFile(outputFileName, JSON.stringify(snippets, null, '\t'), function (err) {
+    var jsonOutput = JSON.stringify(snippets, null, '\t');
+    
+    // Bug Fix: change \\$ to just $.  Json Stringify changes the \$ in the sublime template to \\$ so VSCode inserts \$ instead of $ when using the snippets.
+    fs.writeFile(outputFileName, jsonOutput.replace(/\\\\\$/g, '\$'), function (err) {
         if (err) throw err;
         console.log('File wrote to ' + outputFileName);
     });
 	console.log(count + " snippet(s) found and converted." + (errors.length > 0 ? '\n\nProblems while converting: \n' + errors.join('\n'): ''));
 	return count;
 
-	function convert(folderPath) {
+    function convert(folderPath) {
 	
 		var files = [];
         getFolderContent(folderPath, files,errors);
