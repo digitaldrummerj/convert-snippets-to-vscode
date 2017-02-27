@@ -21,7 +21,7 @@ function processSnippetFolder(folderPath, outputFileName) {
     // Bug Fix: change \\$ to just $.  Json Stringify changes the \$ in the sublime template to \\$ so VSCode inserts \$ instead of $ when using the snippets.
     fs.writeFile(outputFileName, jsonOutput.replace(/\\\\\$/g, '\$'), function (err) {
         if (err) throw err;
-        console.log('File wrote to ' + outputFileName);
+        console.log('File written to ' + outputFileName);
     });
 	console.log(count + " snippet(s) found and converted." + (errors.length > 0 ? '\n\nProblems while converting: \n' + errors.join('\n'): ''));
 	return count;
